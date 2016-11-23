@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Open Sans',helvetica,arial,sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
