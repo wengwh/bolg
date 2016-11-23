@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>git-bolg</name>
+=======
+	<name>git-blog</name>
+>>>>>>> 20084b54e51e23fc043141b9293fbfdccb283e21
 	<comment></comment>
 	<projects>
 	</projects>
