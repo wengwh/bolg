@@ -8,9 +8,9 @@ permalink: /
         <div class="content-wrap">
           <div id="content" class="content">
             
-		<ul id="pag-itemContainer" style="list-style:none;">
   <section id="posts" class="posts-expand">
     
+		<ul id="pag-itemContainer" style="list-style:none;">
  {% assign counter = 0 %}
 		{% for post in site.categories['Linux'] %}
 		{% assign counter = counter | plus: 1 %}
@@ -71,8 +71,8 @@ permalink: /
   </article>
         </li>
         {% endfor %}
-  </section>
         </ul>
+  </section>
         {% include pagination.html %}
         
 
