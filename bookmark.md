@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Bookmarks
-subtitle: <span class="mega-octicon octicon-repo"></span>&nbsp;&nbsp; To mark useful libs - tools - books
+title: 书签
+subtitle: <span class="mega-octicon octicon-repo"></span>&nbsp;&nbsp; 记录有用的组件 - 工具 - 书籍
 menu: Bookmark
 ---
 
