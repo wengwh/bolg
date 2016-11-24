@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-<<<<<<< HEAD
     <wb-module deploy-name="git-bolg">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <property name="context-root" value="git-bolg"/>
         <property name="java-output-path" value="/git-bolg/WebRoot/WEB-INF/classes"/>
-=======
-    <wb-module deploy-name="git-blog">
-        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
-        <property name="context-root" value="git-blog"/>
-        <property name="java-output-path" value="/git-blog/WebRoot/WEB-INF/classes"/>
->>>>>>> 20084b54e51e23fc043141b9293fbfdccb283e21
     </wb-module>
 </project-modules>

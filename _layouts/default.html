@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-	{% if page.title != 'index' %}
-	    {% include head.html %}
-	{% else %}
-		{% include index_head.html %}
-	{% endif %}
+{% include head.html %}
 
+    <body>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+    {% include header.html %}
 
-  <div class="container one-collumn sidebar-position-right page-home ">
-    <div class="headband"></div>
+        <div class="content">
+            {{ content }}
+        </div>
 
-	{% if page.title != 'index' %}
-	    {% include header.html %}
-	{% endif %}
+    {% include footer.html %}
 
-    {{ content }}
+    </body>
 
-
-</body>
 </html>
