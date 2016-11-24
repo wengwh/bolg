@@ -69,11 +69,11 @@ tags: [activiti]
 ```
 
 
-### 4.代码顺序
+## 4.代码顺序
 
 modeler.html->editor.html->app.js/stencil-controller.js->properties.js->oryx.debug.js(核心代码，每个版本都是基于这个做封装)
 
-### 5.总结
+## 5.总结
 
 整个设计器其实都是基于oryx.debug.js做了一层扩展，扩展的代码量不多，使用了angularJS，大家在看的时候应该也很容易看懂。其实有空可以研究看看oryx.debug.js，毕竟这个是精华，我还没研究，只是之前修改的时候看了里面的属性与配置文件对应的api等，没有细看。大家有时间可以看看。
 
