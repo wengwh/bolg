@@ -15,7 +15,7 @@ no-post-nav: true
         
 1. xml配置：
 
-```XML
+```
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
