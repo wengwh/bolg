@@ -15,7 +15,7 @@ no-post-nav: true
         
 1. xml配置：
 
-```
+```XML
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
@@ -34,7 +34,7 @@ no-post-nav: true
 </mapper>
 ```
 
-```
+```java
 package com.newland.mango.rest.dao;
 
 import java.io.InputStream;
@@ -55,8 +55,8 @@ public class ProcessCmd  implements Command<List<String>> {
 }
 ```
 
-```
-Set customMybatisXMLMappers = new HashSet();
+```java
+   Set customMybatisXMLMappers = new HashSet();
    customMybatisXMLMappers.add("com/newland/mango/rest/dao/HistoricProcessInstance.xml");
    processEngineConfiguration.setCustomMybatisXMLMappers(customMybatisXMLMappers);
 ```
@@ -64,7 +64,7 @@ xml的配置使用mybatis,自己复制了enginejar的配置，改了id做个实�
 
 2. annotation配置：
 
-```
+```java
 public interface ProcessInstanceDao {
       @Select({
           "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ",
@@ -74,14 +74,14 @@ public interface ProcessInstanceDao {
 }
 ```
 
-```
-Set<Class<?>> set = new HashSet<Class<?>>();
+```java
+   Set<Class<?>> set = new HashSet<Class<?>>();
    set.add(ProcessInstanceDao.class);
    processEngineConfiguration.setCustomMybatisMappers(set);
 ```
 
 ```java
-List<Map<String,Object>> result = managementService.executeCustomSql(customSqlExecution);
+  List<Map<String,Object>> result = managementService.executeCustomSql(customSqlExecution);
   System.out.println("1111111111111:"+result.size());
   List processInstanceIds =managementService.executeCommand(new ProcessCmd());
   System.out.println("222222222:"+processInstanceIds.size());
