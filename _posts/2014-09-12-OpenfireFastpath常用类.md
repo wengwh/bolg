@@ -118,7 +118,6 @@ public class Workgroup {
     private int maxChats;  
     private int minChats;  
   
-  
     private Map<Long, RequestQueue> queues = new HashMap<Long, RequestQueue>();  
   
     /** 
@@ -175,31 +174,31 @@ InvitationRequest：这个就是邀请的请求，比如fastpath在路由成功�
 
 ```java
 public RoundRobinDispatcher(RequestQueue queue) {
-	this.queue = queue;
-	agentList = new LinkedList<AgentSession>();
-	properties = new JiveLiveProperties("fpDispatcherProp", queue.getID());
-	try {
-		info = infoProvider.getDispatcherInfo(queue.getWorkgroup(), queue.getID());
-	} catch (NotFoundException e) {
-		Log.error("Queue ID " + queue.getID(), e);
-	}
-	// Recreate the agentSelector to use for selecting the best agent to
-	// receive the offer
-	loadAgentSelector();
+    this.queue = queue;
+    agentList = new LinkedList<AgentSession>();
+    properties = new JiveLiveProperties("fpDispatcherProp", queue.getID());
+    try {
+        info = infoProvider.getDispatcherInfo(queue.getWorkgroup(), queue.getID());
+    } catch (NotFoundException e) {
+        Log.error("Queue ID " + queue.getID(), e);
+    }
+    // Recreate the agentSelector to use for selecting the best agent to
+    // receive the offer
+    loadAgentSelector();
 
-	// Fill the list of AgentSessions that are active in the queue. Once the
-	// list has been
-	// filled this dispatcher will be notified when new AgentSessions join
-	// the queue or leave
-	// the queue
-	fillAgentsList();
-	Log.error("after fillAgentsList");
-	TaskEngine.getInstance().scheduleAtFixedRate(new TimerTask() {
-		@Override
-		public void run() {
-			checkForNewRequests();
-		}
-	}, 2000, 2000);
+    // Fill the list of AgentSessions that are active in the queue. Once the
+    // list has been
+    // filled this dispatcher will be notified when new AgentSessions join
+    // the queue or leave
+    // the queue
+    fillAgentsList();
+    Log.error("after fillAgentsList");
+    TaskEngine.getInstance().scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            checkForNewRequests();
+        }
+    }, 2000, 2000);
 }
 ```
 
@@ -207,122 +206,122 @@ public RoundRobinDispatcher(RequestQueue queue) {
 
 ```java
 public void dispatch(Offer offer) {
-	// The time when the request should timeout
-	// long timeoutTime = System.currentTimeMillis() +
-	// info.getRequestTimeout();
-	// 这里修改，要是有输入超时时间，不用默认的
-	final Request request = offer.getRequest();
-	long timeoutTime = System.currentTimeMillis() + ((request.getMetaData().containsKey("timeout")) ? Long.parseLong(request.getMetaData().get("timeout").get(0)) : info.getRequestTimeout());
-	boolean canBeInQueue = request instanceof UserRequest;
-	Map<String, List<String>> map = request.getMetaData();
-	String initialAgent = map.get("agent") == null || map.get("agent").isEmpty() ? null : map.get("agent").get(0);
-	String ignoreAgent = map.get("ignore") == null || map.get("ignore").isEmpty() ? null : map.get("ignore").get(0);
-	// Log debug trace
-	Log.debug("RR - Dispatching request: " + request + " in queue: " + queue.getAddress());
+    // The time when the request should timeout
+    // long timeoutTime = System.currentTimeMillis() +
+    // info.getRequestTimeout();
+    // 这里修改，要是有输入超时时间，不用默认的
+    final Request request = offer.getRequest();
+    long timeoutTime = System.currentTimeMillis() + ((request.getMetaData().containsKey("timeout")) ? Long.parseLong(request.getMetaData().get("timeout").get(0)) : info.getRequestTimeout());
+    boolean canBeInQueue = request instanceof UserRequest;
+    Map<String, List<String>> map = request.getMetaData();
+    String initialAgent = map.get("agent") == null || map.get("agent").isEmpty() ? null : map.get("agent").get(0);
+    String ignoreAgent = map.get("ignore") == null || map.get("ignore").isEmpty() ? null : map.get("ignore").get(0);
+    // Log debug trace
+    Log.debug("RR - Dispatching request: " + request + " in queue: " + queue.getAddress());
 
-	// Send the offer to the best agent. While the offer has not been
-	// accepted send it to the
-	// next best agent. If there aren't any agent available then skip this
-	// section and proceed
-	// to overflow the current request
-	if (!agentList.isEmpty()) {
-		for (long timeRemaining = timeoutTime - System.currentTimeMillis(); !offer.isAccepted() && timeRemaining > 0 && !offer.isCancelled(); timeRemaining = timeoutTime - System.currentTimeMillis()) {
+    // Send the offer to the best agent. While the offer has not been
+    // accepted send it to the
+    // next best agent. If there aren't any agent available then skip this
+    // section and proceed
+    // to overflow the current request
+    if (!agentList.isEmpty()) {
+        for (long timeRemaining = timeoutTime - System.currentTimeMillis(); !offer.isAccepted() && timeRemaining > 0 && !offer.isCancelled(); timeRemaining = timeoutTime - System.currentTimeMillis()) {
 
-			try {
-				AgentSession session = getBestNextAgent(initialAgent, ignoreAgent, offer);
-				Log.error("AgentSession:");
-				if (session == null && agentList.isEmpty()) {
-					// Stop looking for an agent since there are no more
-					// agent available
-					Log.error("agentList.isEmpty():");
-					break;
-				} else if (session == null || offer.isRejector(session)) {
-					Log.error("offer.isRejector(session):");
-					initialAgent = null;
-					Thread.sleep(1000);
-				} else {
-					// Recheck for changed maxchat setting
-					Workgroup workgroup = request.getWorkgroup();
-					if (session.getCurrentChats(workgroup) < session.getMaxChats(workgroup)) {
-						// Set the timeout of the offer based on the
-						// remaining time of the
-						// initial request and the default offer timeout
-						timeRemaining = timeoutTime - System.currentTimeMillis();
-						// 设置offer超时时长，是怕offer超时时长超过request时长
-						offer.setTimeout(timeRemaining < info.getOfferTimeout() ? timeRemaining : info.getOfferTimeout());
+            try {
+                AgentSession session = getBestNextAgent(initialAgent, ignoreAgent, offer);
+                Log.error("AgentSession:");
+                if (session == null && agentList.isEmpty()) {
+                    // Stop looking for an agent since there are no more
+                    // agent available
+                    Log.error("agentList.isEmpty():");
+                    break;
+                } else if (session == null || offer.isRejector(session)) {
+                    Log.error("offer.isRejector(session):");
+                    initialAgent = null;
+                    Thread.sleep(1000);
+                } else {
+                    // Recheck for changed maxchat setting
+                    Workgroup workgroup = request.getWorkgroup();
+                    if (session.getCurrentChats(workgroup) < session.getMaxChats(workgroup)) {
+                        // Set the timeout of the offer based on the
+                        // remaining time of the
+                        // initial request and the default offer timeout
+                        timeRemaining = timeoutTime - System.currentTimeMillis();
+                        // 设置offer超时时长，是怕offer超时时长超过request时长
+                        offer.setTimeout(timeRemaining < info.getOfferTimeout() ? timeRemaining : info.getOfferTimeout());
 
-						// Make the offer and wait for a resolution to the
-						// offer
-						if (!request.sendOffer(session, queue)) {
-							// Log debug trace
-							Log.debug("RR - Offer for request: " + offer.getRequest() + " FAILED TO BE SENT to agent: " + session.getJID());
-							continue;
-						}
-						// Log debug trace
-						Log.debug("RR - Offer for request: " + offer.getRequest() + " SENT to agent: " + session.getJID());
+                        // Make the offer and wait for a resolution to the
+                        // offer
+                        if (!request.sendOffer(session, queue)) {
+                            // Log debug trace
+                            Log.debug("RR - Offer for request: " + offer.getRequest() + " FAILED TO BE SENT to agent: " + session.getJID());
+                            continue;
+                        }
+                        // Log debug trace
+                        Log.debug("RR - Offer for request: " + offer.getRequest() + " SENT to agent: " + session.getJID());
 
-						offer.waitForResolution();
-						// If the offer was accepted, we send out the
-						// invites
-						// and reset the offer
-						if (offer.isAccepted()) {
-							// Get the first agent that accepted the offer
-							AgentSession selectedAgent = offer.getAcceptedSessions().get(0);
-							// Log debug trace
-							Log.debug("RR - Agent: " + selectedAgent.getJID() + " ACCEPTED request: " + request);
-							// Create the room and send the invitations
-							offer.invite(selectedAgent);
+                        offer.waitForResolution();
+                        // If the offer was accepted, we send out the
+                        // invites
+                        // and reset the offer
+                        if (offer.isAccepted()) {
+                            // Get the first agent that accepted the offer
+                            AgentSession selectedAgent = offer.getAcceptedSessions().get(0);
+                            // Log debug trace
+                            Log.debug("RR - Agent: " + selectedAgent.getJID() + " ACCEPTED request: " + request);
+                            // Create the room and send the invitations
+                            offer.invite(selectedAgent);
 
-							// 发送监控消息 bywengwh
-							sendUmccWorkMsg(request, selectedAgent);
+                            // 发送监控消息 bywengwh
+                            sendUmccWorkMsg(request, selectedAgent);
 
-							// Notify the agents that accepted the offer
-							// that the offer process
-							// has finished
-							for (AgentSession agent : offer.getAcceptedSessions()) {
-								agent.removeOffer(offer);
-							}
-							if (canBeInQueue) {
-								// Remove the user from the queue since his
-								// request has
-								// been accepted
-								queue.removeRequest((UserRequest) request);
-							}
-						}
-					} else {
-						// Log debug trace
-						Log.debug("RR - Selected agent: " + session.getJID() + " has reached max number of chats");
-					}
-				}
-			} catch (Exception e) {
-				Log.error(e.getMessage(), e);
-			}
-		}
-	}
-	if (!offer.isAccepted() && !offer.isCancelled()) {
-		// Calculate the maximum time limit for an unattended request before
-		long requestTimeOut = (request.getMetaData().containsKey("timeout")) ? Long.parseLong(request.getMetaData().get("timeout").get(0)) : info.getRequestTimeout();
-		long limit = request.getCreationTime().getTime() + (requestTimeOut * (getOverflowTimes() + 1));
+                            // Notify the agents that accepted the offer
+                            // that the offer process
+                            // has finished
+                            for (AgentSession agent : offer.getAcceptedSessions()) {
+                                agent.removeOffer(offer);
+                            }
+                            if (canBeInQueue) {
+                                // Remove the user from the queue since his
+                                // request has
+                                // been accepted
+                                queue.removeRequest((UserRequest) request);
+                            }
+                        }
+                    } else {
+                        // Log debug trace
+                        Log.debug("RR - Selected agent: " + session.getJID() + " has reached max number of chats");
+                    }
+                }
+            } catch (Exception e) {
+                Log.error(e.getMessage(), e);
+            }
+        }
+    }
+    if (!offer.isAccepted() && !offer.isCancelled()) {
+        // Calculate the maximum time limit for an unattended request before
+        long requestTimeOut = (request.getMetaData().containsKey("timeout")) ? Long.parseLong(request.getMetaData().get("timeout").get(0)) : info.getRequestTimeout();
+        long limit = request.getCreationTime().getTime() + (requestTimeOut * (getOverflowTimes() + 1));
 
-		if (limit - System.currentTimeMillis() <= 0 || !canBeInQueue) {
-			// Log debug trace
-			Log.debug("RR - Cancelling request that maxed out overflow limit or cannot be queued: " + request);
-			// Cancel the request if it has overflowed 'n' times
-			request.cancel(Request.CancelType.AGENT_NOT_FOUND);
-		} else {
-			// Overflow if request timed out and was not dispatched and max
-			// number of overflows
-			// has not been reached yet
-			overflow(offer);
-			// If there is no other queue to overflow then cancel the
-			// request
-			if (!offer.isAccepted() && !offer.isCancelled()) {
-				// Log debug trace
-				Log.debug("RR - Cancelling request that didn't overflow: " + request);
-				request.cancel(Request.CancelType.AGENT_NOT_FOUND);
-			}
-		}
-	}
+        if (limit - System.currentTimeMillis() <= 0 || !canBeInQueue) {
+            // Log debug trace
+            Log.debug("RR - Cancelling request that maxed out overflow limit or cannot be queued: " + request);
+            // Cancel the request if it has overflowed 'n' times
+            request.cancel(Request.CancelType.AGENT_NOT_FOUND);
+        } else {
+            // Overflow if request timed out and was not dispatched and max
+            // number of overflows
+            // has not been reached yet
+            overflow(offer);
+            // If there is no other queue to overflow then cancel the
+            // request
+            if (!offer.isAccepted() && !offer.isCancelled()) {
+                // Log debug trace
+                Log.debug("RR - Cancelling request that didn't overflow: " + request);
+                request.cancel(Request.CancelType.AGENT_NOT_FOUND);
+            }
+        }
+    }
 }
 ```
 

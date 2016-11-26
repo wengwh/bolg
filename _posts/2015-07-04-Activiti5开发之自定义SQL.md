@@ -22,11 +22,9 @@ no-post-nav: true
 
 <mapper namespace="org.activiti.engine.impl.persistence.entity.HistoricProcessInstanceEntity">
 
-  <select id="selectHistoricProcessInstanceIdsByProcessDefinitionId1" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultType="string">
-    select ID_
-    from ${prefix}ACT_HI_PROCINST 
-    where PROC_DEF_ID_ = #{parameter}
-  </select>
+    <select id="selectHistoricProcessInstanceIdsByProcessDefinitionId1" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultType="string">
+        select ID_ from ${prefix}ACT_HI_PROCINST where PROC_DEF_ID_ = #{parameter}
+    </select>
 
 </mapper>
 ```
@@ -61,8 +59,8 @@ xml的配置使用mybatis,自己复制了enginejar的配置，改了id做个实�
 
 ```java
 public interface ProcessInstanceDao {
-	@Select({ "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ", "where instance.proc_def_id_ =definition.id_" })
-	List<Map<String, Object>> selectTaskWithSpecificVariable(String variableName);
+    @Select({ "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ", "where instance.proc_def_id_ =definition.id_" })
+    List<Map<String, Object>> selectTaskWithSpecificVariable(String variableName);
 }
 ```
 
