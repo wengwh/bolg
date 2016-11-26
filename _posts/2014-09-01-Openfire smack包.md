@@ -10,7 +10,6 @@ tags: [Openfire]
 ## 1.发消息
 
 ```java
-
 public boolean sendMessage(String toJid,String content){  
     Message message = new Message();  
     message.setFrom(connectManager.getJid());  
@@ -28,7 +27,7 @@ public boolean sendMessage(String toJid,String content){
 
 扩展包的java：
 
-{% highlight java %}
+```java
 
 import org.jivesoftware.smack.packet.PacketExtension;  
   
@@ -76,7 +75,7 @@ public class BaseInfo implements PacketExtension{
     }  
   
 }
-{% endhighlight %}
+```
 
 ## 2.修改状态
 
