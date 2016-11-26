@@ -35,8 +35,6 @@ no-post-nav: true
 {% endhighlight %}
 
 {% highlight java %}
-package com.newland.mango.rest.dao;
-
 import java.io.InputStream;
 import java.util.List;
 
