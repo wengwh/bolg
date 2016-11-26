@@ -7,7 +7,7 @@ tags: [Openfire]
 
 在最近一个新的项目里面要用openfire很多的自带功能，比如：加好友，加聊天室，发消息，发送文件，获取组消息，更新状态等。虽然用c++开发，但是先用Java实现一下。smack可以说把openfire有设计的那些交互协议都封装的很完整，在消息服务器，其实很好实现各种功能，说到底就是协议的定义，openfire自己定义了这几种协议来实现这些功能，smack把这些协议封装成对应的对象去处理，让开发者更容易上手。
 
-## 1.发消息
+## 1.发送消息
 
 ```java
 public boolean sendMessage(String toJid,String content){  
@@ -28,7 +28,6 @@ public boolean sendMessage(String toJid,String content){
 扩展包的java：
 
 ```java
-
 import org.jivesoftware.smack.packet.PacketExtension;  
   
 public class BaseInfo implements PacketExtension{  
@@ -79,8 +78,7 @@ public class BaseInfo implements PacketExtension{
 
 ## 2.修改状态
 
-{% highlight java %}
-
+```java
 /** 
  * 修改状态 
  * @param state 
@@ -124,13 +122,11 @@ public boolean sendPresence(String state,String toJid){
     presence.setStatus(status);  
     return connectManager.sendPacket(presence);  
 }  
+```
 
-{% endhighlight %}
+## 3.对Roster好友组的操作
 
-## 3.对Roster中好友组的操作
-
-{% highlight java %}
-
+```java
 /**  
  * 返回所有组信息  
  * @return List(RosterGroup)  
@@ -184,12 +180,11 @@ public List<RosterEntry> getAllEntries() {
     return EntriesList;    
 }    
 
-{% endhighlight %}
+```
 
 ## 4.对Roster好友的操作
 
-{% highlight java %}
-      
+```java
 /**  
  * 添加一个好友无分组  
  */    
@@ -239,5 +234,5 @@ public boolean removeUser(String userName){
     }    
         
 }    
-{% endhighlight %}
+```
 
