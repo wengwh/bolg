@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Openfire Fastpath入门
+title: Openfire fastpath入门
 category: Openfire
 tags: [Openfire]
 no-post-nav: true
 ---
 
-Fastpath的介绍：
+fastpath的介绍：
 
 1.提供了Workgroup协议的实现，Workgroup的概念就是专门对应在线客服这个典型场景了。这是企业或组织机构的客服需求的核心概念和功能，类似于呼叫中心。
 
@@ -19,96 +19,97 @@ fasthpath：实现的原理就是以技能组为标准对用户加入对应的�
 这是openfire提供的插件，在smack中也提供了对应的api，这里提供一个agent端的实例
 
 ```java
-/** 
- * 加入技能组 
- * @param workGroupName 
- * @return 
- */  
-public boolean joinWorkGroup(String workGroupName,int maxChats){  
-    boolean bResult=false;  
-    agentSession=new AgentSession(workGroupName,connection);  
-    agentSession.addInvitationListener(new WorkgroupInvitationListener(){  
-        public void invitationReceived(WorkgroupInvitation workgroupInvitation) {  
-//              System.out.println("workgroupInvitation.getWorkgroupName():"+workgroupInvitation.getWorkgroupName());  
-//              System.out.println("workgroupInvitation.getMessageBody():"+workgroupInvitation.getMessageBody());  
-//              System.out.println("workgroupInvitation.getMetaData():"+workgroupInvitation.getMetaData());  
-//              System.out.println("workgroupInvitation.getInvitationSender():"+workgroupInvitation.getInvitationSender());  
-//              System.out.println("workgroupInvitation.getGroupChatName():"+workgroupInvitation.getGroupChatName());  
-            joinRoom(workgroupInvitation.getGroupChatName());  
-//              System.out.println("name:"+workgroupInvitation.getGroupChatName()+",id:"+workgroupInvitation.getSessionID());  
-            /*try { 
-                agentSession.sendRoomTransfer(RoomTransfer.Type.user, "10110@kfas1", workgroupInvitation.getSessionID(), "转接"); 
-            } catch (XMPPException e) { 
-                // TODO Auto-generated catch block 
-                e.printStackTrace(); 
-            }*/  
-            }  
-              
-        });  
-        agentSession.addOfferListener(new OfferListener(){  
-  
-            public void offerReceived(Offer offer) {  
-                System.out.println("offer.getUserJID();"+offer.getUserJID());  
-            System.out.println("offer.getContent();"+offer.getContent());  
-                offer.accept();  
-            }  
-  
-            public void offerRevoked(RevokedOffer revokedOffer) {  
-                System.out.println("revokedOffer.getReason():"+revokedOffer.getReason());  
-            System.out.println("revokedOffer.getUserJID():"+revokedOffer.getUserJID());  
-            }  
-              
-        });  
-        agentSession.addQueueUsersListener(new QueueUsersListener(){  
-  
-            public void averageWaitTimeUpdated(WorkgroupQueue workgroupQueue, int averageWaitTime) {  
-//              System.out.println("averageWaitTime:"+averageWaitTime);  
-//              System.out.println("workgroupQueue.getAverageWaitTime():"+workgroupQueue.getAverageWaitTime());  
-//              System.out.println("workgroupQueue.getCurrentChats():"+workgroupQueue.getCurrentChats());  
-//                
-            }  
-  
-            public void oldestEntryUpdated(WorkgroupQueue workgroupQueue, Date oldestEntry) {  
-//              System.out.println("oldestEntry:"+oldestEntry.toString());  
-                  
-            }  
-  
-            public void statusUpdated(WorkgroupQueue workgroupQueue, Status status) {  
-//              System.out.println("status:"+status.toString());  
-                  
-            }  
-  
-            public void usersUpdated(WorkgroupQueue workgroupQueue, Set uers) {  
-                for (Iterator iterator = uers.iterator(); iterator  
-                        .hasNext();) {  
-                    Object user = (Object) iterator.next();  
-                    System.out.println("user:"+user.toString());  
-                  
-            }  
-              
-        }  
-          
-    });  
-    try {  
-        agentSession.setOnline(true);  
-        /*Presence presence=new Presence(Presence.Type.available); 
-        presence.setTo("demo@workgroup.kftest2"); 
-        presence.setPriority(1); 
-        connection.sendPacket(presence); 
-        System.out.println("presence OK");*/  
-        agentSession.setStatus(Presence.Mode.available,maxChats,"OK");  
-        System.out.println(agentSession.getMaxChats());  
-    } catch (XMPPException e) {  
-        e.printStackTrace();  
-    }  
-      
-    bResult=true;  
-    return bResult;  
-}  
+/**
+ * 加入技能组
+ * 
+ * @param workGroupName
+ * @return
+ */
+public boolean joinWorkGroup(String workGroupName, int maxChats) {
+	boolean bResult = false;
+	agentSession = new AgentSession(workGroupName, connection);
+	agentSession.addInvitationListener(new WorkgroupInvitationListener() {
+		public void invitationReceived(WorkgroupInvitation workgroupInvitation) {
+			// System.out.println("workgroupInvitation.getWorkgroupName():"+workgroupInvitation.getWorkgroupName());
+			// System.out.println("workgroupInvitation.getMessageBody():"+workgroupInvitation.getMessageBody());
+			// System.out.println("workgroupInvitation.getMetaData():"+workgroupInvitation.getMetaData());
+			// System.out.println("workgroupInvitation.getInvitationSender():"+workgroupInvitation.getInvitationSender());
+			// System.out.println("workgroupInvitation.getGroupChatName():"+workgroupInvitation.getGroupChatName());
+			joinRoom(workgroupInvitation.getGroupChatName());
+			// System.out.println("name:"+workgroupInvitation.getGroupChatName()+",id:"+workgroupInvitation.getSessionID());
+			/*
+			 * try { agentSession.sendRoomTransfer(RoomTransfer.Type.user,
+			 * "10110@kfas1", workgroupInvitation.getSessionID(), "转接"); }
+			 * catch (XMPPException e) { // TODO Auto-generated catch block
+			 * e.printStackTrace(); }
+			 */
+		}
+
+	});
+	agentSession.addOfferListener(new OfferListener() {
+
+		public void offerReceived(Offer offer) {
+			System.out.println("offer.getUserJID();" + offer.getUserJID());
+			System.out.println("offer.getContent();" + offer.getContent());
+			offer.accept();
+		}
+
+		public void offerRevoked(RevokedOffer revokedOffer) {
+			System.out.println("revokedOffer.getReason():" + revokedOffer.getReason());
+			System.out.println("revokedOffer.getUserJID():" + revokedOffer.getUserJID());
+		}
+
+	});
+	agentSession.addQueueUsersListener(new QueueUsersListener() {
+
+		public void averageWaitTimeUpdated(WorkgroupQueue workgroupQueue, int averageWaitTime) {
+			// System.out.println("averageWaitTime:"+averageWaitTime);
+			// System.out.println("workgroupQueue.getAverageWaitTime():"+workgroupQueue.getAverageWaitTime());
+			// System.out.println("workgroupQueue.getCurrentChats():"+workgroupQueue.getCurrentChats());
+			//
+		}
+
+		public void oldestEntryUpdated(WorkgroupQueue workgroupQueue, Date oldestEntry) {
+			// System.out.println("oldestEntry:"+oldestEntry.toString());
+
+		}
+
+		public void statusUpdated(WorkgroupQueue workgroupQueue, Status status) {
+			// System.out.println("status:"+status.toString());
+
+		}
+
+		public void usersUpdated(WorkgroupQueue workgroupQueue, Set uers) {
+			for (Iterator iterator = uers.iterator(); iterator.hasNext();) {
+				Object user = (Object) iterator.next();
+				System.out.println("user:" + user.toString());
+
+			}
+
+		}
+
+	});
+	try {
+		agentSession.setOnline(true);
+		/*
+		 * Presence presence=new Presence(Presence.Type.available);
+		 * presence.setTo("demo@workgroup.kftest2");
+		 * presence.setPriority(1); connection.sendPacket(presence);
+		 * System.out.println("presence OK");
+		 */
+		agentSession.setStatus(Presence.Mode.available, maxChats, "OK");
+		System.out.println(agentSession.getMaxChats());
+	} catch (XMPPException e) {
+		e.printStackTrace();
+	}
+
+	bResult = true;
+	return bResult;
+}
 ```
 
 
-用户user端的加入排队实例，也是基于smack包编写，可以发现smack都提供了对应的对象进行编程：
+用户user端的加入排队实例，也是基于smack包编写，可以发现smack都提供了对应的对象进行编程
 
 ```java
 public void joinQueue(String workgroupName, Map metaData) {
@@ -118,8 +119,7 @@ public void joinQueue(String workgroupName, Map metaData) {
 	this.listenForQueue();
 
 	workgroupInvitationListener = new WorkgroupInvitationListener() {
-		public void invitationReceived(
-				WorkgroupInvitation workgroupInvitation) {
+		public void invitationReceived(WorkgroupInvitation workgroupInvitation) {
 			String room = workgroupInvitation.getGroupChatName();
 			joinRoom(room);
 		}
@@ -131,8 +131,7 @@ public void joinQueue(String workgroupName, Map metaData) {
 			workgroup.joinQueue(metaData, userid);
 		} catch (XMPPException e) {
 			// 异常的情况也继续排队，由于技能没有agent会service-unavailable(503)
-			log.error("[>" + callInfo.getJid()
-					+ "<]: Unable to join chat queue.", e);
+			log.error("[>" + callInfo.getJid() + "<]: Unable to join chat queue.", e);
 		}
 	}
 }

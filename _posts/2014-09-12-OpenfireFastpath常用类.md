@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Openfire Fastpath常用类
+title: Openfire fastpath常用类
 category: Openfire
 tags: [Openfire]
 ---
@@ -11,6 +11,7 @@ fastpath在前一章有做了一些介绍，是openfire提供的一种可以实�
 
 ## 1.Agent
 这是对于的客服的实体对象，主要就是记录一些基本的属性，比如：agent的昵称，jid等
+
 ```java
 public class Agent {  
   
@@ -143,18 +144,19 @@ public class Workgroup {
 用户请求的链表集合，通过集合来添加，删除等基本操作用户的排队请求，通过这个实现当前排队人数的推送等
 
 ```java
-    private LinkedList<UserRequest> requests = new LinkedList<UserRequest>();  
+private LinkedList<UserRequest> requests = new LinkedList<UserRequest>();  
 ```
 
 agentSession的集合对象，控制在本队列中的agent，比如agent退出等
 
 ```java
-	private AgentSessionList activeAgents = new AgentSessionList(); 
+private AgentSessionList activeAgents = new AgentSessionList(); 
 ```
 
 路由的实现类
+
 ```java
-	private RoundRobinDispatcher dispatcher;  
+private RoundRobinDispatcher dispatcher;  
 ```
 
 ## 8.Request
@@ -321,7 +323,7 @@ public void dispatch(Offer offer) {
 			}
 		}
 	}
-}   
+}
 ```
 
 这是几个主要的类，对于整个fastpath插件类是很多的，功能很多，还等着大家多看源码去挖掘。其实在看源码的时候，可以观察他们的包的规划，类的命名，fastpath主要是分成：Provider，Handle，dispatcher，event等这几个结尾类。从查看源码明白他们的思路，可能不一定能做到每个类都读一遍，读清楚，但是对于他们的编写习惯有时候也可以借鉴，对自己以后编写也是个好处。虽然现在mvc是风靡Java编程。这里就把fastpath做个总结。后面看看会接触到什么新的东西或者自己学一些java的一些知识的时候在贴出来。
