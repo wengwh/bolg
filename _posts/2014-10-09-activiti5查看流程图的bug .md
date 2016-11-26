@@ -1,12 +1,12 @@
 ---
 layout: post
-title: activiti5回退功能
-category: activiti5
-tags: [activiti5]
+title: Activiti5回退功能
+category: Activiti5
+tags: [Activiti5]
 no-post-nav: true
 ---
 
-在activiti的开发过程中，要用到查看流程图，网络上面有说可以再部署的时候把xml和jpg一起打包这样就可以防止坐标错位等问题，由于我是直接用modeler设计部署，用到的代码是：
+在Activiti5的开发过程中，要用到查看流程图，网络上面有说可以再部署的时候把xml和jpg一起打包这样就可以防止坐标错位等问题，由于我是直接用modeler设计部署，用到的代码是：
 
 {% highlight java %}
 DefaultProcessDiagramGenerator dpg = new DefaultProcessDiagramGenerator();  

@@ -1,15 +1,15 @@
 ---
 layout: post
-title: activiti5 使用自定义sql
-category: activiti5
-tags: [activiti5]
+title: Activiti5使用自定义sql
+category: Activiti5
+tags: [Activiti5]
 no-post-nav: true
 ---
 
-最近在研究工作流activiti，把自己的开发过程做的验证发表出来给大家参考，说的并不会很全，但是都是自己验证可以使用的。
+最近在研究工作流Activiti5，把自己的开发过程做的验证发表出来给大家参考，说的并不会很全，但是都是自己验证可以使用的。
 
 
-有时候在使用activiti提供的api不满足业务的时候使用自定义sql
+有时候在使用Activiti5提供的api不满足业务的时候使用自定义sql
         
 两种：
        

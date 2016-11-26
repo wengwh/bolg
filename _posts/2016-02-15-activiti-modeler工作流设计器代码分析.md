@@ -1,11 +1,11 @@
 ---
 layout: post
-title: activiti-modeler 工作流设计器代码分析
-category: activiti5
-tags: [activiti5]
+title: Activiti-Modeler 工作流设计器代码分析
+category: Activiti5
+tags: [Activiti5]
 ---
 
-####  用了一段时间的activiti5工作流，今天做个设计器的分析。新版的使用了bootstrap和angularJS做了封装。先从文件的说明开始。 
+####  用了一段时间的Activiti5工作流，今天做个设计器的分析。新版的使用了bootstrap和angularJS做了封装。先从文件的说明开始。 
 
 ## 1.文件夹说明
 
