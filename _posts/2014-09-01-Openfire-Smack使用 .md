@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Openfire smack包  
+title: Openfire Smack使用  
 category: Openfire
 tags: [Openfire]
 ---
