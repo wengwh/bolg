@@ -15,14 +15,12 @@ no-post-nav: true
        
 1.xml配置：
 
-{% highlight xml %}
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.activiti.engine.impl.persistence.entity.HistoricProcessInstanceEntity">
-
 
   <select id="selectHistoricProcessInstanceIdsByProcessDefinitionId1" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultType="string">
     select ID_
@@ -30,11 +28,10 @@ no-post-nav: true
     where PROC_DEF_ID_ = #{parameter}
   </select>
 
-
 </mapper>
-{% endhighlight %}
+```
 
-{% highlight java %}
+```java
 import java.io.InputStream;
 import java.util.List;
 
@@ -51,38 +48,35 @@ public class ProcessCmd  implements Command<List<String>> {
     }
 
 }
-{% endhighlight %}
+```
 
-{% highlight java %}
-   Set customMybatisXMLMappers = new HashSet();
-   customMybatisXMLMappers.add("com/newland/mango/rest/dao/HistoricProcessInstance.xml");
-   processEngineConfiguration.setCustomMybatisXMLMappers(customMybatisXMLMappers);
-{% endhighlight %}
+```java
+Set customMybatisXMLMappers = new HashSet();
+customMybatisXMLMappers.add("com/plumdo/activities/rest/dao/HistoricProcessInstance.xml");
+processEngineConfiguration.setCustomMybatisXMLMappers(customMybatisXMLMappers);
+```
 xml的配置使用mybatis,自己复制了enginejar的配置，改了id做个实验。
 
 2.annotation配置：
 
-{% highlight java %}
+```java
 public interface ProcessInstanceDao {
-      @Select({
-          "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ",
-          "where instance.proc_def_id_ =definition.id_"
-      })
-      List<Map<String, Object>> selectTaskWithSpecificVariable(String variableName);
+	@Select({ "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ", "where instance.proc_def_id_ =definition.id_" })
+	List<Map<String, Object>> selectTaskWithSpecificVariable(String variableName);
 }
-{% endhighlight %}
+```
 
-{% highlight java %}
-   Set<Class<?>> set = new HashSet<Class<?>>();
-   set.add(ProcessInstanceDao.class);
-   processEngineConfiguration.setCustomMybatisMappers(set);
-{% endhighlight %}
+```java
+Set<Class<?>> set = new HashSet<Class<?>>();
+set.add(ProcessInstanceDao.class);
+processEngineConfiguration.setCustomMybatisMappers(set);
+```
 
-{% highlight java %}
-  List<Map<String,Object>> result = managementService.executeCustomSql(customSqlExecution);
-  System.out.println("1111111111111:"+result.size());
-  List processInstanceIds =managementService.executeCommand(new ProcessCmd());
-  System.out.println("222222222:"+processInstanceIds.size());
-  Model model = repositoryService.getModel(modelId);
-{% endhighlight %}
+```java
+List<Map<String,Object>> result = managementService.executeCustomSql(customSqlExecution);
+System.out.println(result.size());
+List processInstanceIds =managementService.executeCommand(new ProcessCmd());
+System.out.println(processInstanceIds.size());
+Model model = repositoryService.getModel(modelId);
+```
 两种都可以，我更推荐第一种，其实如果是查询，可以使用各种service提供的本地查询，可以直接定义sql。
