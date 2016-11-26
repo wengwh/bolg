@@ -1,3 +1,4 @@
+git@github.com:wengwh/wengwh.github.io.git
 # Yummy Jekyll Theme
 
 A Simple, Bootstrap Based Theme. Especially for developers who like to show their projects on website and like to take notes. There are also some magical features to discover. 

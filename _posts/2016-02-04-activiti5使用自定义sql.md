@@ -12,8 +12,8 @@ no-post-nav: true
 有时候在使用activiti提供的api不满足业务的时候使用自定义sql
         
 两种：
-        
-1. xml配置：
+       
+1.xml配置：
 
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -55,16 +55,16 @@ public class ProcessCmd  implements Command<List<String>> {
 }
 {% endhighlight %}
 
-```java
+{% highlight java %}
    Set customMybatisXMLMappers = new HashSet();
    customMybatisXMLMappers.add("com/newland/mango/rest/dao/HistoricProcessInstance.xml");
    processEngineConfiguration.setCustomMybatisXMLMappers(customMybatisXMLMappers);
-```
+{% endhighlight %}
 xml的配置使用mybatis,自己复制了enginejar的配置，改了id做个实验。
 
-2. annotation配置：
+2.annotation配置：
 
-```java
+{% highlight java %}
 public interface ProcessInstanceDao {
       @Select({
           "SELECT instance.proc_inst_id_ from act_hi_procinst instance,act_re_procdef definition ",
@@ -72,19 +72,19 @@ public interface ProcessInstanceDao {
       })
       List<Map<String, Object>> selectTaskWithSpecificVariable(String variableName);
 }
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
    Set<Class<?>> set = new HashSet<Class<?>>();
    set.add(ProcessInstanceDao.class);
    processEngineConfiguration.setCustomMybatisMappers(set);
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
   List<Map<String,Object>> result = managementService.executeCustomSql(customSqlExecution);
   System.out.println("1111111111111:"+result.size());
   List processInstanceIds =managementService.executeCommand(new ProcessCmd());
   System.out.println("222222222:"+processInstanceIds.size());
   Model model = repositoryService.getModel(modelId);
-```
+{% endhighlight %}
 两种都可以，我更推荐第一种，其实如果是查询，可以使用各种service提供的本地查询，可以直接定义sql。
