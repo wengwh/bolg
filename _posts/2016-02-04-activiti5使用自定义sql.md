@@ -15,7 +15,7 @@ no-post-nav: true
         
 1. xml配置：
 
-```
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
@@ -32,9 +32,9 @@ no-post-nav: true
 
 
 </mapper>
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
 package com.newland.mango.rest.dao;
 
 import java.io.InputStream;
@@ -53,7 +53,7 @@ public class ProcessCmd  implements Command<List<String>> {
     }
 
 }
-```
+{% endhighlight %}
 
 ```java
    Set customMybatisXMLMappers = new HashSet();
