@@ -6,12 +6,12 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: 我是码农 # ex. I m Chuan
+title: I m JAVA Coder # ex. I m Chuan
 name: 程序员_翁 # ex. DONGChuan
 email: 415554484@qq.com
 location: 福建福州 # ex. Nice, France
 company: plumdo
-company_url: my_company_website
+company_url: http://www.plumdo.com
 github_url: https://github.com/wengwh # ex. https://github.com/DONGChuan
 description: 个人博客
 favicon: favicon.ico # Image must be in assets/images

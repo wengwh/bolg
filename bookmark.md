@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 书签
-subtitle: <span class="mega-octicon octicon-repo"></span>&nbsp;&nbsp; 记录有用的组件 - 工具 - 书籍
+subtitle: <span class="mega-octicon octicon-repo"></span>&nbsp;&nbsp; 记录常用的组件 - 工具 - 书籍
 menu: Bookmark
 ---
 
