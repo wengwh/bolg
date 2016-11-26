@@ -9,7 +9,7 @@ tags: [Openfire]
 
 ## 1.发消息
 
-{% highlight java %}
+```java
 
 public boolean sendMessage(String toJid,String content){  
     Message message = new Message();  
@@ -24,7 +24,7 @@ public boolean sendMessage(String toJid,String content){
     message.addExtension(baseInfo);//消息包的扩展  
     return connectManager.sendPacket(message);  
 } 
-{% endhighlight %}
+```
 
 扩展包的java：
 
