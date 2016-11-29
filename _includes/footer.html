@@ -31,7 +31,16 @@
 
     <!-- My JS -->
     <script type="text/javascript" src="/assets/js/script.js"></script>
-
+    
+  	<!-- cb-search -->
+  	<script type="text/javascript" src="/search/js/bootstrap3-typeahead.min.js"></script>
+  	<script type="text/javascript" src="/search/js/cb-search.js"></script>
+  	<script>
+	    $(function(){
+	        $("pre").css('display','block');
+	    });
+  	</script>
+  	
     {% for javascript in page.javascript %}
     <script src="/assets/js/{{javascript}}"></script>
     {% endfor %}
