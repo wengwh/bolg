@@ -15,9 +15,6 @@
             {% endfor %}
         </ul>
 
-        <!-- Pagination -->
-        {% include pagination.html %}
-
         <!-- Comments -->
         {% include disqus-comments.html %}
 
@@ -29,6 +26,17 @@
 
 </div>
 <script>
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	if(getParameterByName('category')!=""){
+		$("li.posts-list-item").hide();
+		$("li[name*='"+getParameterByName('category')+"']").show(); 
+	}
+
     $(document).ready(function(){
 
         // Enable bootstrap tooltip

@@ -12,18 +12,6 @@
             <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
         </a>
 
-	 	<div class="search-tool"
-		      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
-	    	<input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="搜索博客">
-	
-		    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
-		        <img src="/search/img/cb-close.png" id="close-btn"/>
-		    </div>
-		</div>
-		<div class="btn-scroll-up btn-group-vertical display">
-			<button type="button" id="search-btn" class="btn btn-primary"><i class="octicon octicon-search"></i></button>
-		    <button type="button" id="scroll-btn" class="btn btn-primary"><i class="octicon octicon-arrow-up"></i></button>
-		</div>
     </div>
 
     <!-- Third-Party JS -->
@@ -32,15 +20,6 @@
     <!-- My JS -->
     <script type="text/javascript" src="/assets/js/script.js"></script>
     
-  	<!-- cb-search -->
-  	<script type="text/javascript" src="/search/js/bootstrap3-typeahead.min.js"></script>
-  	<script type="text/javascript" src="/search/js/cb-search.js"></script>
-  	<script>
-	    $(function(){
-	        $("pre").css('display','block');
-	    });
-  	</script>
-  	
     {% for javascript in page.javascript %}
     <script src="/assets/js/{{javascript}}"></script>
     {% endfor %}

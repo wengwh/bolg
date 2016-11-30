@@ -1,9 +1,17 @@
 <h3 class="sidebar-title">博客分类</h3>
 <div id="blog-categories">
     <ul class="list-group">
+     	<li class="list-group-item">
+     		<a href="blog">
+     			全部
+    	 	</a>
+     		 <span class="badge">{{ site.posts.size }}</span>
+     	</li>
         {% for category in site.categories %}
         <li class="list-group-item">
-            {{ category | first }}
+        	<a href="blog?category={{ category | first }}">
+           	 {{ category | first }}
+            </a>
             <span class="badge">{{ category[1].size }}</span>
         </li>
         {% endfor %}
