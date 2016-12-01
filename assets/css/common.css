@@ -17,7 +17,6 @@
     z-index: 103;
 
     color: #000;
-    background: #fff;
 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -25,9 +24,26 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+.site-header{
+    color: #fff;
+}
+.site-header .site-header-nav-item {
+    color: #9acfea;
+}
 
-.site-header #site-header-brand {
+.site-header.site-header-nav-scrolled a {
     color: #2e2e2e;
+}
+
+.site-header.site-header-nav-scrolled #site-header-brand {
+    color: #2e2e2e !important;
+}
+
+.site-header.site-header-nav-scrolled a:hover {
+    color: #4183c4;
+}
+.site-header #site-header-brand {
+    color: #fff;
     float: left;
 }
 
@@ -36,7 +52,7 @@
 }
 
 .site-header a:hover {
-    color: #4183c4;
+    color: #fff;
 }
 
 #site-header-brand, #site-header-brand .octicon {
