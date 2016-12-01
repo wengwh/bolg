@@ -1,0 +1,39 @@
+- name:
+    detail: 福建星网锐捷股份有限公司
+  desc:
+    detail: 现在，就职于星网锐捷，从事java研发工作。
+  date:
+    detail: 2016.12
+  job:
+    detail: java
+  icon: glyphicon glyphicon-lock
+
+- name:
+    detail: 福建新大陆软件公司
+  desc:
+    detail: 2015.4-2016.6就职于新大陆软件，开发工作流组件Mango，涉及技术：Activiti5，AngularJs，SpringMVC，Dubbo，Rest。
+  date:
+    detail: 2016.6
+  job:
+    detail: Activiti5
+  icon: glyphicon glyphicon-star
+
+- name:
+    detail: 福建库易科技公司
+  desc:
+    detail: 2013.3-2015.4就职于库易科技，10000号呼叫系统开发。涉及技术：Openfire，Struts1，Spring2，extJs，Oracle，redis，WebSphere。
+  date:
+    detail: 2015.4
+  job:
+    detail: Openfire
+  icon: glyphicon glyphicon-cloud
+
+- name:
+    detail: 集美大学
+  desc:
+    detail: 2009.9-2013.7年就读于集美大学，计算机科学与技术专业。
+  date:
+    detail: 2013.7
+  job:
+    detail: 学生
+  icon: glyphicon glyphicon-user

@@ -25,6 +25,8 @@
     "geopattern": "^1.2.3",
     "underscore": "^1.8.3",
     "primer-markdown": "^2.5.1",
-    "flag-icon-css": "^2.3.1"
+    "flag-icon-css": "^2.3.1",
+    "animate.css": "^3.5.2",
+    "wow": "wowjs#^1.1.2"
   }
 }

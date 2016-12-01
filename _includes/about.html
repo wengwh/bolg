@@ -1,76 +1,77 @@
-<div class="about row">
-
-    <div class="col-md-8">
-
-        <h2>关于我</h2>
-
-        <p>我就是我，归途之中的迷途小码农</p>
-
-        <h2>联系</h2>
-
-        <ul>
-            <li>Email：<a href="mailto:{{ site.email }}" target="_top">{{ site.email }}</a></li>
-            <li>GitHub：<a href="{{ site.github_url }}">{{ site.github_url }}</a></li>
-        </ul>
-
-        <h2>技能</h2>
-
-        {% if site.skill_software_keywords %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Software Engineer Keywords</h3>
-            </div>
-            <div class="panel-body">
-                {% for keyword in site.skill_software_keywords %}
-                <button class="btn btn-default" type="button">{{ keyword }}</button>
-                {% endfor %}
+<div class="container">
+    <div class="row">
+        <!-- avatar -->
+        <div class="col-xs-offset-4 col-xs-4">
+            <div class="text-center wow zoomIn">
+                <img src="{{ site.head_img | prepend: site.baseurl }}" height="110" width="110" class="img-responsive img-circle" alt="">
+                <h4><span class="navy">{{ site.name }}</span></h4>
+                <ul class="list-inline social-icon">
+                    <li><a href="mailto:{{ site.email }}"><i class="octicon octicon-mail"></i></a>
+                    </li>
+                    <li><a href="{{site.url}}/feed.xml" target="blank"><i class="octicon octicon-rss"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
-        {% endif %}
-
-        {% if site.skill_j2ee_keywords %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">J2EE Developer Keywords</h3>
-            </div>
-            <div class="panel-body">
-                {% for keyword in site.skill_j2ee_keywords %}
-                <button class="btn btn-default" type="button">{{ keyword }}</button>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        {% if site.skill_mobile_app_keywords %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Mobile Developer Keywords</h3>
-            </div>
-            <div class="panel-body">
-                {% for keyword in site.skill_mobile_app_keywords %}
-                <button class="btn btn-default" type="button">{{ keyword }}</button>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        {% if site.skill_web_keywords %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Web Developer Keywords</h3>
-            </div>
-            <div class="panel-body">
-                {% for keyword in site.skill_web_keywords %}
-                <button class="btn btn-default" type="button">{{ keyword }}</button>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
     </div>
-
-    <div class="col-md-4">
-        {% include sidebar-popular-repo.html %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg wow zoomIn">
+            <p><span>{{ site.description }}</span></p>
+        </div>
     </div>
-
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1><span>职业生涯</span></h1>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-12">
+            <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
+            {% for career in site.data.careers %}
+            {% assign loopindex = forloop.index | modulo: 2 %}
+                <div class="vertical-timeline-block">
+                    <div class="vertical-timeline-icon navy-bg wow rotateIn">
+                        <i class="{{ career.icon }}"></i>
+                    </div>
+                    <div class="vertical-timeline-content wow {% if loopindex == 1 %} rotateInUpRight {% else %} rotateInUpLeft {% endif %}">
+                        <h2><span>{{ career.name.detail }}</span></h2>
+                        <p><span>{{ career.desc.detail }} </span></p>
+                        <span class="vertical-date"><span> {{ career.date.detail }} </span>
+                        <br/> <small><span>{{ career.job.detail }}</span></small> </span>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1><span>我的技能</span></h1>
+        </div>
+    </div>
+    <div class="row features-block">
+        {% for skill in site.data.skills %}
+            {% assign loopindex = forloop.index | modulo: 2 %}
+        <div class="row">
+            <div class="col-lg-1 col-lg-offset-2 wow {% if loopindex == 1 %} fadeInLeft {% else %} fadeInRight {% endif %}">
+                <p>{{ skill.name }}</p>
+            </div>
+            <div class="col-lg-7 wow  {% if loopindex == 1 %} fadeInRight {% else %} fadeInLeft {% endif %}">
+                <div class="progress progress-bar-default">
+                    <div style="width: {{ skill.percentage }}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ skill.percentage }}" role="progressbar" class="progress-bar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+
