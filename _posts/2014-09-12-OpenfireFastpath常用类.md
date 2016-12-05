@@ -2,7 +2,7 @@
 layout: post
 title: Openfire fastpath常用类
 category: Openfire
-tags: [Openfire]
+tags: [Openfire,fasthpath]
 ---
 
 fastpath在前一章有做了一些介绍，是openfire提供的一种可以实现客服功能的插件。

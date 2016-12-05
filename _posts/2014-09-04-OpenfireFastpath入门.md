@@ -2,7 +2,7 @@
 layout: post
 title: Openfire fastpath入门
 category: Openfire
-tags: [Openfire]
+tags: [Openfire,fasthpath]
 no-post-nav: true
 ---
 
