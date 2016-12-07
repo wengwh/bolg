@@ -6,7 +6,6 @@
     initial = 0;
     show = !visible;
     var visibility = visible ? 'block' : 'none';
-    console.info(1)
     $("#search-content").val("");
     $(".search-tool").css("display", visibility);
   };
@@ -40,12 +39,24 @@
     toggleSearch(true);
   });
 
-	
+  var is_visible = false;
+  $(window).scroll(function() {
+	if($(window).scrollTop() > parseInt($(window).height() / 4)) {
+		if(!is_visible) {
+			$('#scroll-btn').show();
+			is_visible = true;
+		}
+	} else {
+		if(is_visible) {
+			$('#scroll-btn').hide();
+			is_visible = false;
+		}
+	}
+  });
 
   $('#scroll-btn').click(function() {
 	 $('html,body').animate({scrollTop: 0}, "slow");
   });
- 
  
   $.getJSON("/search/cb-search.json")
     .done(function (data) {
