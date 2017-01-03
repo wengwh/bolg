@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2015年年终感悟
+title: 2015年终感悟
 category: 工作
 tags: [工作]
 no-post-nav: true
