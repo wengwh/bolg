@@ -9,7 +9,7 @@ github_url: https://github.com/wengwh
 favicon: favicon.ico 
 repository: wengwh/wengwh.github.io 
 head_img: 'assets/images/head.jpg'
-description: '我是一个java码农，2013年开始工作至今，主要从事业务系统开发，涉及的技术：Openfire，Activiti5，Spring，Redis等。最近想研究微服务，以前涉及过dubbo，现在学习Spring-cloud，Spring-boot'
+description: '我是一个java码农，2013年开始工作至今，主要从事业务系统开发，涉及的技术：Openfire，Activiti5，Spring，Redis，RabbitMQ等。最近从事微服务相关开发。
 
 # The base hostname & protocol for your site
 # For local test, please use http://localhost:4000

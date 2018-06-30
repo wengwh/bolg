@@ -1,8 +1,8 @@
 - name: JAVA
   percentage: 75
 
-- name: Spring/MVC
-  percentage: 80
+- name: Docker
+  percentage: 70
   
 - name: Activiti5
   percentage: 85
@@ -11,7 +11,7 @@
   percentage: 85
   
 - name: Oracle/MYSQL
-  percentage: 70
+  percentage: 75
   
 - name: Linux/Shell
   percentage: 60

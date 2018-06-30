@@ -1,11 +1,11 @@
 - name:
     detail: 福建星网锐捷股份有限公司
   desc:
-    detail: 现在，就职于星网锐捷，从事java研发工作。
+    detail: 2016.6-2018.4，就职于星网锐捷，开发酒吧线上系统，涉及技术：SpringBoot，RabbitMQ，Redis，Docker
   date:
     detail: 2016.12
   job:
-    detail: java
+    detail: saas
   icon: glyphicon glyphicon-lock
 
 - name:
